@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1" />
+		<title>Swiper.js无缝轮播--中间大两边小且透明度变大小</title>
+		<link rel="stylesheet" href="css/swiper.min.css">
+		<link rel="stylesheet" href="css/style.css">
+		<script type="text/javascript" src="js/isMobile.min.js"></script>
+		<script src="js/swiper.min.js"></script>
+		<script>
+			(function() {
+				var html = document.documentElement;
+				//适配
+				if(!isMobile.any) {
+					html.style.width = '640px';
+					html.style.margin = '0 auto';
+					//window.location.href="www.baidu.com";
+				}
+
+				window.onresize = function() {
+					var hWidth = html.getBoundingClientRect().width;
+					html.style.fontSize = hWidth / 15 + "px";
+				};
+
+				window.onresize();
+			})();
+		</script>
+	</head>
+	<body>
+		<header></header>
+		<section id="certify">
+			<div class="swiper-container">
+				<ul class="swiper-wrapper">
+					<li class="swiper-slide"><img src="images/1.png"/></li>
+					<li class="swiper-slide"><img src="images/2.png"/></li>
+					<li class="swiper-slide"><img src="images/3.png"/></li>
+					<li class="swiper-slide"><img src="images/4.png"/></li>
+					<li class="swiper-slide"><img src="images/5.png"/></li>
+					<li class="swiper-slide"><img src="images/6.png"/></li>
+					<li class="swiper-slide"><img src="images/7.png"/></li>
+				</div>
+			</div>
+		</section>
+		<footer></footer>
+		<script>
+			var mySwiper = new Swiper('#certify .swiper-container', {
+				watchSlidesProgress: true,
+				slidesPerView: 'auto',
+				centeredSlides: true,
+				loop: true,
+				loopedSlides: 5,
+				on: {
+					progress: function(progress) {
+						for(i = 0; i < this.slides.length; i++) {
+							var slide = this.slides.eq(i);
+							var slideProgress = this.slides[i].progress;
+							scale = 1 - Math.abs(slideProgress) / 5;
+							scale_o = 1 - Math.abs(slideProgress) / 2;
+							slide.transform('scale(' + scale + ')');
+							slide.css('opacity', scale_o);
+							if(Math.abs(slideProgress) > 3) {
+								slide.css('opacity', 0);
+							}
+						}
+					},
+					setTransition: function(transition) {
+						for(var i = 0; i < this.slides.length; i++) {
+							var slide = this.slides.eq(i)
+							slide.transition(transition);
+						}
+
+					}
+				}
+
+			})
+		</script>
+	</body>
+
+</html>
