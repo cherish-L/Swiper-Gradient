@@ -97,7 +97,7 @@ body {
   overflow: hidden;
   background: #FFFFFF;
   border-radius: 1.33333rem;
-  box-shadow: 0px 0.13333rem 1.33333rem 0rem #999999;
+  box-shadow: 0rem 0.13333rem 1.33333rem 0rem #b4b4b4;
 }
 
 #wrap #certify .swiper-container .swiper-wrapper .swiper-slide img {
