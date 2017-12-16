@@ -48,16 +48,17 @@
 		</div>
 		<script>
 			var mySwiper = new Swiper('#certify .swiper-container', {
-				watchSlidesProgress: true,
-				slidesPerView: 'auto',
-				centeredSlides: true,
-				loop: true,
-				loopedSlides: 5,
+				watchSlidesProgress: true,      ///开启这个参数来计算每个slide的progress(进度、进程)，Swiper的progress无需设置即开启。
+				slidesPerView: 'auto',          ///设置slider容器能够同时显示的slides数量,自动根据slides的宽度来设定数量
+				centeredSlides: true,			///设定为true时，active slide会居中，而不是默认状态下的居左。
+				loop: true,						///会在原本slide前后复制若干个slide(默认一个)并在合适的时候切换，让Swiper看起来是循环的(无缝轮播)
+				loopedSlides: 5,					///在loop模式下使用slidesPerview:'auto'，还需使用该参数设置所要用到的loop个数(一般设置为本来slide的个数)。
 				on: {
-					progress: function(progress) {
+					progress: function(progress) {  ///progress(进度、进程),也就是说通过回调函数来判断每个slide的progress值得变化对于slide的progress属性，活动的那个为0，其他的依次减1。
+													///例：如果一共有6个slide，活动的是第三个，从第一个到第六个的progress属性分别是：2、1、0、-1、-2、-3。
 						for(i = 0; i < this.slides.length; i++) {
 							var slide = this.slides.eq(i);
-							var slideProgress = this.slides[i].progress;
+							var slideProgress = this.slides[i].progress; ///获取每个slide的progress值
 							scale = 1 - Math.abs(slideProgress) / 5;
 							scale_o = 1 - Math.abs(slideProgress) / 2;
 							slide.transform('scale(' + scale + ')');
